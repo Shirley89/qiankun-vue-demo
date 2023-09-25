@@ -10,6 +10,11 @@ import router from './router'
 import store from './store'
 import { registerMicroApps, start } from 'qiankun';
 
+var host = "62.234.164.217"; // 生产环境
+if (process.env.NODE_ENV == 'development') {  // 开发环境
+  host = "localhost";
+}
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -21,18 +26,18 @@ new Vue({
 registerMicroApps([
   { 
     name: 'app-vue-hash', 
-    entry: 'http://localhost:1111', 
+    entry: `http://${host}:1111`, 
     container: '#appContainer', 
     activeRule: '/app-vue-hash', 
     props: { data : { store, router } }
   },
-  { 
-    name: 'app-vue-history',
-    entry: 'http://localhost:2222', 
-    container: '#appContainer', 
-    activeRule: '/app-vue-history',
-    props: { data : store }
-  },
+  // { 
+  //   name: 'app-vue-history',
+  //   entry: `http://${host}:2222`, 
+  //   container: '#appContainer', 
+  //   activeRule: '/app-vue-history',
+  //   props: { data : store }
+  // },
 ]);
 
 start();

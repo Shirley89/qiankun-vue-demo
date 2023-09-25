@@ -1,20 +1,20 @@
 <template>
   <div class="home">
+    <span class="block underline" v-if="isQiankun" @click="changeParentState">主项目的数据：{{ commonData.parent }}，点击变为2</span>
     <img alt="Vue logo" src="../assets/logo.png" >
-    <span v-if="isQiankun" @click="changeParentState">主项目的数据：{{ commonData.parent }},点击变为2</span>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  },
+  // components: {
+  //   HelloWorld
+  // },
   data() {
     return {
       isQiankun: window.__POWERED_BY_QIANKUN__,

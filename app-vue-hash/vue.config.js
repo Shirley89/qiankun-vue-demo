@@ -23,5 +23,10 @@ module.exports = {
       libraryTarget: 'umd',// 把子应用打包成 umd 库格式
       jsonpFunction: `webpackJsonp_${name}`,
     },
+    resolve: {
+      alias: {
+        'common': '@/../../common',
+      }
+    }
   },
 };

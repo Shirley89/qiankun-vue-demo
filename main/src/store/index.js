@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     commonData: {
-      // parent: 1
+      parent: 0
     },
   },
   mutations: {

@@ -3,22 +3,49 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-      <p>a链接跳转到主项目/其他子项目的页面，页面会刷新，效果不好<a href="/about">parent About</a></p>
+      <HelloWorld :msg="msg"/>
+      <p>{{showEmail}}</p>
+      <p>
+        a链接跳转到主项目/其他子项目的页面，页面会刷新，效果不好
+        <a href="/about">parent About</a>
+      </p>
       <p v-if="isQiankun">
         主项目把router传给子项目，子项目用这个router来跳转
-        <span @click="goToPage('/about')">parent About</span>
-        <span @click="goToPage('/app-vue-history/about')">app-vue-history About</span>
+        <span class="underline" @click="goToPage('/about')">parent About</span>
+        <!-- <span @click="goToPage('/app-vue-history/about')">app-vue-history About</span> -->
       </p>
+      <p></p>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
+import HelloWorld from '@/components/HelloWorld.vue'
+
+import { subscribeUser } from 'common/observables/user/channel';
+
+let unsubscribe = null;
+
 export default {
+  components: {
+    HelloWorld
+  },
+  computed: {
+    msg(){
+      return `Welcome! ${this.user.name}`;
+    },
+    showEmail() {
+      return `您的邮箱是：${this.user.email}`;
+    }
+  },
   data() {
     return {
       isQiankun: window.__POWERED_BY_QIANKUN__,
+      user: {
+        name: "subapp-value",
+        email: "subapp-value"
+      },
     }
   },
   methods: {
@@ -27,6 +54,14 @@ export default {
       this.$root.parentRouter.push(path);
     }
   },
+  created: function () {
+    unsubscribe = subscribeUser((userData) => {
+      this.user = userData;
+    });
+  },
+  destroyed: function() {
+    unsubscribe && unsubscribe();
+  }
 }
 </script>
 
@@ -51,11 +86,16 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-span{
+span, span.underline {
   font-weight: bold;
   color: #2c3e50;
   cursor: pointer;
   margin: 0 15px;
+}
+span.underline {
   text-decoration: underline;
+}
+span.block {
+  display: block;
 }
 </style>

@@ -10,6 +10,8 @@
     "core-js": "^3.6.4",
     "custom-event-polyfill": "^1.0.7",
     "fetch-polyfill": "^0.8.2",
+    "mockjs": "^1.1.0",
+    "observable-rx": "^1.0.1",
     "qiankun": "^2.3.2",
     "vue": "^2.6.12",
     "vue-router": "^3.1.5",
@@ -17,6 +19,8 @@
     "whatwg-fetch": "^3.2.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.22.20",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",
     "@vue/cli-plugin-vuex": "~4.2.0",
